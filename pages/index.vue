@@ -1,22 +1,33 @@
 <script setup>
 
+    
+
     let displayText = ""
 
     const loading = ref(false)
 
     const { add, sub } = useUtils()
 
-    const load = () => {
-        if(loading.value) {
+    const loadImage = async () => {
+
+        if(loading.value == true) {
             return
         }
-        displayText = add(Math.floor(Math.random() * 10), Math.floor(Math.random() * 10))
-        //console.log(loading.value)
+
+        displayText = "Loading..."
+
         loading.value = true
-        setTimeout(() => {
-            loading.value = false
-            displayText = ""
-        }, 1000)
+        let img = await useFetch(`https://dummyjson.com/products/${Math.floor(Math.random() * 10)}`)
+        loading.value = false
+
+        let { id, title, description } = img.data.value
+
+        if(description) {
+            displayText = description
+        }
+        else {
+            displayText = "Error when fetching"
+        }
     }
 
 </script>
@@ -28,7 +39,7 @@
             {{item}}
         </div> -->
         {{  displayText }}
-        <button @click="load" class="p-4 font-semibold bg-gray-200 hover:bg-gray-300 w-24 rounded-xl">
+        <button @click="loadImage" class="p-4 font-semibold bg-gray-200 hover:bg-gray-300 w-24 rounded-xl">
             <div v-if="loading">
                 Loading...
             </div>
