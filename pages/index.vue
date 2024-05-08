@@ -17,7 +17,7 @@
         displayText = "Loading..."
 
         loading.value = true
-        let img = await useFetch(`https://dummyjson.com/products/${Math.floor(Math.random() * 10)}`)
+        let img = await useFetch(`https://dummyjson.com/products/${Math.floor(Math.random() * 20)}`)
         loading.value = false
 
         let { id, title, description } = img.data.value
