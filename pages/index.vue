@@ -26,7 +26,7 @@
             displayText = description
         }
         else {
-            displayText = "Error when fetching"
+            displayText = "Error when fetching "
         }
     }
 
